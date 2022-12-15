@@ -1,31 +1,25 @@
 const refs = {
-  inputRef: document.querySelector('#validation-input'),
+  inputRef: document.querySelector("#validation-input"),
 };
 
-const inputLengthRef = refs.inputRef.dataset.length;
+const inputLengthRef = Number(refs.inputRef.dataset.length);
 
-refs.inputRef.addEventListener('blur', handleInputTextLength);
+refs.inputRef.addEventListener("blur", handleInputTextLength);
 
 function handleInputTextLength(event) {
-  if (event.currentTarget.value.length < inputLengthRef) {
-    invalidInputValue();
-  } else {
+  refs.inputRef.classList.remove("valid", "invalid");
+
+  if (event.currentTarget.value.length === inputLengthRef) {
     validInputValue();
+  } else {
+    invalidInputValue();
   }
 }
 
-const invalidInputValue = () => {
-  refs.inputRef.classList.add('invalid');
-
-  if (refs.inputRef.classList.contains('valid')) {
-    refs.inputRef.classList.remove('valid');
-  }
+const validInputValue = () => {
+  refs.inputRef.classList.add("valid");
 };
 
-const validInputValue = () => {
-  refs.inputRef.classList.add('valid');
-
-  if (refs.inputRef.classList.contains('valid')) {
-    refs.inputRef.classList.remove('invalid');
-  }
+const invalidInputValue = () => {
+  refs.inputRef.classList.add("invalid");
 };
